@@ -208,7 +208,6 @@ def genre_update_wtf():
 
 
 
-
 """
     Auteur : OM 2021.04.08
     Définition d'une "route" /genre_delete
