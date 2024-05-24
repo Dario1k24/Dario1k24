@@ -158,20 +158,21 @@ def genre_update_wtf():
             # Récupérer les données du formulaire
             name_genre_update = form_update.nom_genre_update_wtf.data
             name_genre_update = name_genre_update.lower()
-            date_genre_essai = form_update.date_genre_wtf_essai.data
+            prenom_employer = form_update.prenom_employer_wtf.data
 
             # Créer un dictionnaire de valeurs pour la requête SQL
             valeur_update_dictionnaire = {
                 "value_id_genre": id_genre_update,
                 "value_name_genre": name_genre_update,
-                "value_date_genre_essai": date_genre_essai
+                "value_prenom_employer": prenom_employer
+
             }
 
             # Requête SQL pour mettre à jour le genre
             str_sql_update_intitulegenre = """
                 UPDATE t_employer 
                 SET nom_employer = %(value_name_genre)s, 
-                    date_ins_employer = %(value_date_genre_essai)s 
+                    prenom_employer = %(value_prenom_employer)s 
                 WHERE ID_employer = %(value_id_genre)s
             """
             with DBconnection() as mconn_bd:
@@ -193,7 +194,7 @@ def genre_update_wtf():
 
             # Pré-remplissage des champs du formulaire avec les données du genre
             form_update.nom_genre_update_wtf.data = data_nom_genre["nom_employer"]
-            form_update.date_genre_wtf_essai.data = data_nom_genre["prenom_employer"]
+            form_update.prenom_employer_wtf.data = data_nom_genre["prenom_employer"]
 
     except Exception as Exception_genre_update_wtf:
         # Gestion des exceptions
@@ -312,3 +313,6 @@ def genre_delete_wtf():
                            form_delete=form_delete,
                            btn_submit_del=btn_submit_del,
                            data_films_associes=data_films_attribue_genre_delete)
+
+
+

@@ -147,9 +147,9 @@ def film_update_wtf():
 """Effacer(delete) un film qui a été sélectionné dans le formulaire "films_genres_afficher.html"
 Auteur : OM 2022.04.11
 Définition d'une "route" /film_delete
-    
+
 Test : ex. cliquer sur le menu "film" puis cliquer sur le bouton "DELETE" d'un "film"
-    
+
 Paramètres : sans
 
 Remarque :  Dans le champ "nom_film_delete_wtf" du formulaire "films/film_delete_wtf.html"
