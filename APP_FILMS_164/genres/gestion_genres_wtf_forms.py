@@ -1,5 +1,5 @@
 """
-    Fichier : gestion_genres_wtf_forms.py
+    Fichier : gestion_s_wtf_forms.py
     Auteur : OM 2021.03.22
     Gestion des formulaires avec WTF
 """
@@ -24,7 +24,7 @@ class FormWTFAjouterGenres(FlaskForm):
                                                                                   "apostrophe, de double trait union")
                                                                    ])
 
-    submit = SubmitField("Enregistrer genre")
+    submit = SubmitField("Enregistrer ce nouveau employer")
 
 
 class FormWTFUpdateGenre(FlaskForm):
@@ -33,7 +33,7 @@ class FormWTFUpdateGenre(FlaskForm):
         Définition d'un "bouton" submit avec un libellé personnalisé.
     """
     nom_genre_update_regexp = "^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$"
-    nom_genre_update_wtf = StringField("Nom ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+    nom_employer = StringField("Nom ", validators=[Length(min=2, max=20, message="min 2 max 20"),
                                                                           Regexp(nom_genre_update_regexp,
                                                                                  message="Pas de chiffres, de "
                                                                                          "caractères "
@@ -42,7 +42,7 @@ class FormWTFUpdateGenre(FlaskForm):
                                                                                          "apostrophe, de double trait "
                                                                                          "union")
                                                                           ])
-    prenom_employer_wtf = StringField("Prénom ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+    prenom_employer = StringField("Prénom ", validators=[Length(min=2, max=20, message="min 2 max 20"),
                                                                           Regexp(nom_genre_update_regexp,
                                                                                  message="Pas de chiffres, de "
                                                                                          "caractères "
@@ -51,8 +51,16 @@ class FormWTFUpdateGenre(FlaskForm):
                                                                                          "apostrophe, de double trait "
                                                                                          "union")
                                                                           ])
-
-    submit = SubmitField("Update genre")
+    numero_telephone_employer = StringField("Numéro téléphone ", validators=[Length(min=2, max=20, message="min 2 max 20"),
+                                                                          Regexp(nom_genre_update_regexp,
+                                                                                 message="Pas de chiffres, de "
+                                                                                         "caractères "
+                                                                                         "spéciaux, "
+                                                                                         "d'espace à double, de double "
+                                                                                         "apostrophe, de double trait "
+                                                                                         "union")
+                                                                          ])
+    submit = SubmitField("Editer l'employer")
 
 
 class FormWTFDeleteGenre(FlaskForm):
@@ -64,7 +72,7 @@ class FormWTFDeleteGenre(FlaskForm):
         submit_btn_conf_del : Bouton de confirmation pour effacer un "genre".
         submit_btn_annuler : Bouton qui permet d'afficher la table "t_genre".
     """
-    nom_genre_delete_wtf = StringField("Effacer ce genre")
-    submit_btn_del = SubmitField("Effacer genre")
-    submit_btn_conf_del = SubmitField("Etes-vous sur d'effacer ?")
+    nom_genre_delete_wtf = StringField("Effacer cet employer")
+    submit_btn_del = SubmitField("Effacer")
+    submit_btn_conf_del = SubmitField("Etes-vous sur d'effacer l'employer ?")
     submit_btn_annuler = SubmitField("Annuler")
