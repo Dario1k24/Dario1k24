@@ -1,21 +1,85 @@
 {% extends "base.html" %}
-{% block title %} Homepage FILMS {% endblock %}
+{% block title %} Accueil - Entreprise de Logistique {% endblock %}
 {% block body %}
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h3>
-				Démo complète du 2023.03.25
-			</h3>
-			<h3>
-				CRUD sur 3 tables autour des films et leurs genres associés<br>
-			</h3>
-			<ul>
-				<li class="list-item">
-					Lire le readme.md
-				</li>
-			</ul>
-		</div>
-	</div>
+<style>
+    body {
+        background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+        color: #fff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .text-gradient {
+        background: -webkit-linear-gradient(45deg, #ff004c, #333399);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientAnimation 5s infinite;
+    }
+
+    .custom-button {
+        background: #ff004c;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border-radius: 50px;
+        transition: background 0.3s, color 0.3s, transform 0.3s;
+        margin: 0 1cm;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        opacity: 0;
+    }
+
+    .custom-button:hover {
+        background: #333399;
+        color: #fff;
+        border: 2px solid #333399;
+        transform: scale(1.1);
+    }
+
+    /* Animation for fade-in effect */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Apply animation to elements */
+    .fade-in {
+        opacity: 0;
+        animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes gradientAnimation {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+
+    #content {
+        display: none;
+    }
+</style>
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 id="welcome-message" class="display-4 mb-4 text-gradient">Bienvenue sur notre site officiel</h1>
+            <div id="content" class="fade-in">
+                <h1 class="display-4 mb-4 text-gradient">Entreprise de Logistique</h1>
+                <h2 class="mb-4 text-gradient">Gérez votre entreprise de manière plus intelligente et plus efficace</h2>
+                <div class="d-flex justify-content-center mt-5">
+                    <a href="http://127.0.0.1:5000/genres_afficher/ASC/0" class="btn btn-primary custom-button" style="animation-delay: 2s;">Gestion des Employés</a>
+                    <a href="http://127.0.0.1:5000/films_genres_afficher/0" class="btn btn-primary custom-button" style="animation-delay: 2s;">Gestion des Fournisseurs</a>
+                    <a href="http://127.0.0.1:5000/films_genres_afficher/0" class="btn btn-primary custom-button" style="animation-delay: 2s;">Fournisseurs/Produit</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    setTimeout(() => {
+        document.getElementById('welcome-message').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+        document.querySelectorAll('.custom-button').forEach(button => {
+            button.style.opacity = 1;
+            button.style.animation = 'fadeIn 1s ease-out forwards';
+        });
+    }, 2000); // 2 secondes d'affichage avant le contenu
+</script>
 {% endblock %}

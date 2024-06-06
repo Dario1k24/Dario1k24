@@ -127,17 +127,17 @@ INSERT INTO `t_employer` (`ID_employer`, `nom_employer`, `prenom_employer`, `num
 DROP TABLE IF EXISTS `t_fournisseur`;
 CREATE TABLE IF NOT EXISTS `t_fournisseur` (
   `ID_fournisseur` int NOT NULL AUTO_INCREMENT,
-  `ID_produit` int DEFAULT NULL,
+  `ID_fournisseur` int DEFAULT NULL,
   `nom_fournisseur` varchar(255) DEFAULT NULL,
   `adresse_fournisseur` varchar(255) DEFAULT NULL,
   `numero_telephone_fournisseur` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`ID_fournisseur`),
-  KEY `FK_fournisseur_produit` (`ID_produit`),
-  CONSTRAINT `FK_fournisseur_produit` FOREIGN KEY (`ID_produit`) REFERENCES `t_produit` (`ID_produit`)
+  KEY `FK_fournisseur_produit` (`ID_fournisseur`),
+  CONSTRAINT `FK_fournisseur_produit` FOREIGN KEY (`ID_fournisseur`) REFERENCES `t_fournisseur` (`ID_fournisseur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table dario_dibella_expi1a_entreprise_logistique_i164_2024.t_fournisseur : ~15 rows (environ)
-INSERT INTO `t_fournisseur` (`ID_fournisseur`, `ID_produit`, `nom_fournisseur`, `adresse_fournisseur`, `numero_telephone_fournisseur`) VALUES
+INSERT INTO `t_fournisseur` (`ID_fournisseur`, `ID_fournisseur`, `nom_fournisseur`, `adresse_fournisseur`, `numero_telephone_fournisseur`) VALUES
 	(1, 6, 'Dell', 'Piazza della Riforma 9, 6901 Lugano', '021 865 43 32'),
 	(2, 9, 'Dell', 'Piazza della Riforma 9, 6901 Lugano', '021 865 43 32'),
 	(3, 15, 'Bechtle', 'Avenue des Alpes 4, 1202 Genève', '021 355 32 54'),
@@ -158,14 +158,14 @@ INSERT INTO `t_fournisseur` (`ID_fournisseur`, `ID_produit`, `nom_fournisseur`, 
 DROP TABLE IF EXISTS `t_gestion_des_commandes`;
 CREATE TABLE IF NOT EXISTS `t_gestion_des_commandes` (
   `ID_gestion_des_commandes` int NOT NULL AUTO_INCREMENT,
-  `ID_produit` int DEFAULT NULL,
+  `ID_fournisseur` int DEFAULT NULL,
   `ID_client` int DEFAULT NULL,
   `ID_livraison` int DEFAULT NULL,
   `ID_chauffeur` int DEFAULT NULL,
   `ID_employer` int DEFAULT NULL,
   `numero_commande` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`ID_gestion_des_commandes`),
-  KEY `FK_commandes_produit` (`ID_produit`),
+  KEY `FK_commandes_produit` (`ID_fournisseur`),
   KEY `FK_commandes_client` (`ID_client`),
   KEY `FK_commandes_livraison` (`ID_livraison`),
   KEY `FK_commandes_chauffeur` (`ID_chauffeur`),
@@ -174,11 +174,11 @@ CREATE TABLE IF NOT EXISTS `t_gestion_des_commandes` (
   CONSTRAINT `FK_commandes_client` FOREIGN KEY (`ID_client`) REFERENCES `t_client` (`ID_client`),
   CONSTRAINT `FK_commandes_employer` FOREIGN KEY (`ID_employer`) REFERENCES `t_employer` (`ID_employer`),
   CONSTRAINT `FK_commandes_livraison` FOREIGN KEY (`ID_livraison`) REFERENCES `t_livraison` (`ID_livraison`),
-  CONSTRAINT `FK_commandes_produit` FOREIGN KEY (`ID_produit`) REFERENCES `t_produit` (`ID_produit`)
+  CONSTRAINT `FK_commandes_produit` FOREIGN KEY (`ID_fournisseur`) REFERENCES `t_fournisseur` (`ID_fournisseur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table dario_dibella_expi1a_entreprise_logistique_i164_2024.t_gestion_des_commandes : ~15 rows (environ)
-INSERT INTO `t_gestion_des_commandes` (`ID_gestion_des_commandes`, `ID_produit`, `ID_client`, `ID_livraison`, `ID_chauffeur`, `ID_employer`, `numero_commande`) VALUES
+INSERT INTO `t_gestion_des_commandes` (`ID_gestion_des_commandes`, `ID_fournisseur`, `ID_client`, `ID_livraison`, `ID_chauffeur`, `ID_employer`, `numero_commande`) VALUES
 	(1, 2, 5, 1, 7, 13, '10-200-01'),
 	(2, 5, 12, 2, 6, 4, '10-200-02'),
 	(3, 7, 3, 3, 12, 6, '10-200-03'),
@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `t_gestion_generale` (
   `ID_gestion_generale` int NOT NULL AUTO_INCREMENT,
   `ID_employer` int DEFAULT NULL,
   `ID_client` int DEFAULT NULL,
-  `ID_produit` int DEFAULT NULL,
+  `ID_fournisseur` int DEFAULT NULL,
   `ID_chauffeur` int DEFAULT NULL,
   `ID_gestion_des_commandes` int DEFAULT NULL,
   `ID_rh` int DEFAULT NULL,
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `t_gestion_generale` (
   `ID_livraison` int DEFAULT NULL,
   PRIMARY KEY (`ID_gestion_generale`),
   KEY `FK_gestion_generale_client` (`ID_client`),
-  KEY `FK_gestion_generale_produit` (`ID_produit`),
+  KEY `FK_gestion_generale_produit` (`ID_fournisseur`),
   KEY `FK_gestion_generale_chauffeur` (`ID_chauffeur`),
   KEY `FK_gestion_generale_commandes` (`ID_gestion_des_commandes`),
   KEY `FK_gestion_generale_rh` (`ID_rh`),
@@ -222,12 +222,12 @@ CREATE TABLE IF NOT EXISTS `t_gestion_generale` (
   CONSTRAINT `FK_gestion_generale_employer` FOREIGN KEY (`ID_employer`) REFERENCES `t_employer` (`ID_employer`),
   CONSTRAINT `fk_gestion_generale_fournisseur` FOREIGN KEY (`ID_fournisseur`) REFERENCES `t_fournisseur` (`ID_fournisseur`),
   CONSTRAINT `fk_gestion_generale_livraison` FOREIGN KEY (`ID_livraison`) REFERENCES `t_livraison` (`ID_livraison`),
-  CONSTRAINT `FK_gestion_generale_produit` FOREIGN KEY (`ID_produit`) REFERENCES `t_produit` (`ID_produit`),
+  CONSTRAINT `FK_gestion_generale_produit` FOREIGN KEY (`ID_fournisseur`) REFERENCES `t_fournisseur` (`ID_fournisseur`),
   CONSTRAINT `FK_gestion_generale_rh` FOREIGN KEY (`ID_rh`) REFERENCES `t_rh` (`ID_rh`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table dario_dibella_expi1a_entreprise_logistique_i164_2024.t_gestion_generale : ~15 rows (environ)
-INSERT INTO `t_gestion_generale` (`ID_gestion_generale`, `ID_employer`, `ID_client`, `ID_produit`, `ID_chauffeur`, `ID_gestion_des_commandes`, `ID_rh`, `ID_fournisseur`, `ID_livraison`) VALUES
+INSERT INTO `t_gestion_generale` (`ID_gestion_generale`, `ID_employer`, `ID_client`, `ID_fournisseur`, `ID_chauffeur`, `ID_gestion_des_commandes`, `ID_rh`, `ID_fournisseur`, `ID_livraison`) VALUES
 	(1, 1, 5, 2, 7, 1, 1, 10, 1),
 	(2, 2, 12, 5, 6, 2, 2, 9, 2),
 	(3, 3, 3, 7, 12, 3, 3, 8, 3),
@@ -249,17 +249,17 @@ DROP TABLE IF EXISTS `t_livraison`;
 CREATE TABLE IF NOT EXISTS `t_livraison` (
   `ID_livraison` int NOT NULL AUTO_INCREMENT,
   `ID_chauffeur` int DEFAULT NULL,
-  `ID_produit` int DEFAULT NULL,
+  `ID_fournisseur` int DEFAULT NULL,
   `date_livraison` datetime DEFAULT NULL,
   PRIMARY KEY (`ID_livraison`),
   KEY `FK_livraison_chauffeur` (`ID_chauffeur`),
-  KEY `FK_livraison_produit` (`ID_produit`),
+  KEY `FK_livraison_produit` (`ID_fournisseur`),
   CONSTRAINT `FK_livraison_chauffeur` FOREIGN KEY (`ID_chauffeur`) REFERENCES `t_chauffeur` (`ID_chauffeur`),
-  CONSTRAINT `FK_livraison_produit` FOREIGN KEY (`ID_produit`) REFERENCES `t_produit` (`ID_produit`)
+  CONSTRAINT `FK_livraison_produit` FOREIGN KEY (`ID_fournisseur`) REFERENCES `t_fournisseur` (`ID_fournisseur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table dario_dibella_expi1a_entreprise_logistique_i164_2024.t_livraison : ~15 rows (environ)
-INSERT INTO `t_livraison` (`ID_livraison`, `ID_chauffeur`, `ID_produit`, `date_livraison`) VALUES
+INSERT INTO `t_livraison` (`ID_livraison`, `ID_chauffeur`, `ID_fournisseur`, `date_livraison`) VALUES
 	(1, 7, 2, '2025-01-12 00:00:00'),
 	(2, 6, 5, '2024-11-11 00:00:00'),
 	(3, 12, 7, '2024-03-27 00:00:00'),
@@ -276,20 +276,20 @@ INSERT INTO `t_livraison` (`ID_livraison`, `ID_chauffeur`, `ID_produit`, `date_l
 	(14, 9, 4, '2025-10-10 00:00:00'),
 	(15, 14, 8, '2024-10-11 00:00:00');
 
--- Listage de la structure de table dario_dibella_expi1a_entreprise_logistique_i164_2024. t_produit
-DROP TABLE IF EXISTS `t_produit`;
-CREATE TABLE IF NOT EXISTS `t_produit` (
-  `ID_produit` int NOT NULL AUTO_INCREMENT,
+-- Listage de la structure de table dario_dibella_expi1a_entreprise_logistique_i164_2024. t_fournisseur
+DROP TABLE IF EXISTS `t_fournisseur`;
+CREATE TABLE IF NOT EXISTS `t_fournisseur` (
+  `ID_fournisseur` int NOT NULL AUTO_INCREMENT,
   `nom_produit` varchar(255) DEFAULT NULL,
   `description_produit` text,
   `poids_produit` decimal(10,2) DEFAULT NULL,
   `quantite_en_stock` int DEFAULT NULL,
   `prix_produit` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`ID_produit`)
+  PRIMARY KEY (`ID_fournisseur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table dario_dibella_expi1a_entreprise_logistique_i164_2024.t_produit : ~15 rows (environ)
-INSERT INTO `t_produit` (`ID_produit`, `nom_produit`, `description_produit`, `poids_produit`, `quantite_en_stock`, `prix_produit`) VALUES
+-- Listage des données de la table dario_dibella_expi1a_entreprise_logistique_i164_2024.t_fournisseur : ~15 rows (environ)
+INSERT INTO `t_fournisseur` (`ID_fournisseur`, `nom_produit`, `description_produit`, `poids_produit`, `quantite_en_stock`, `prix_produit`) VALUES
 	(1, 'Processeur ', 'haute performance pour des calculs rapides et une expérience informatique fluide', 0.10, 32, 200.00),
 	(2, 'Carte graphique', 'Carte dédiée pour des graphismes époustouflants et des jeux fluides ', 1.00, 12, 500.00),
 	(3, 'Mémoire RAM', 'Mémoire vive rapide pour des performances multitâches exceptionnelles', 0.01, 5, 100.00),

@@ -12,16 +12,21 @@
 				{{ form_update.hidden_tag() }}
 				<div class="form-group">
 					<p>
-						{{ form_update.nom_genre_update_wtf.label }}<br>
-						{{ form_update.nom_genre_update_wtf(size=32) }}<br>
-						{% for error in form_update.nom_genre_update_wtf.errors %}
+						{{ form_update.nom_employer.label }}<br>
+						{{ form_update.nom_employer(size=32) }}<br>
+						{% for error in form_update.nom_employer.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
-					</p>
 					<p>
-						{{ form_update.prenom_employer_wtf.label }}<br>
-						{{ form_update.prenom_employer_wtf(size=32) }}<br>
-						{% for error in form_update.prenom_employer_wtf.errors %}
+						{{ form_update.prenom_employer.label }}<br>
+						{{ form_update.prenom_employer(size=32) }}<br>
+						{% for error in form_update.prenom_employer.errors %}
+							<span style="color: red;">[{{ error }}]</span>
+						{% endfor %}
+					<p>
+						{{ form_update.numero_telephone_employer.label }}<br>
+						{{ form_update.numero_telephone_employer(size=32) }}<br>
+						{% for error in form_update.numero_telephone_employer.errors %}
 							<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>

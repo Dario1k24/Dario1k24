@@ -44,22 +44,19 @@
                     <thead>
                         <tr>
                             <th class="">
-                                id
+                                ID
                             </th>
                             <th class="">
-                                Titre
+                                ID_fournisseur
                             </th>
                             <th class="">
-                                Durée
+                                nom_fournisseur
                             </th>
                             <th class="">
-                                Date sortie
+                                adresse_fournisseur
                             </th>
                             <th class="">
-                                Description
-                            </th>
-                            <th class="">
-                                Affiche
+                                numero_telephone_fournisseur
                             </th>
                         </tr>
                     </thead>
@@ -69,19 +66,19 @@
 				<tbody>
 					<tr>
 						<td class="align-middle">
-							{{ row.id_film }}
+							{{ row.ID_fournisseur }}
 						</td>
 						<td class="align-middle">
-							{{ row.nom_film }}
+							{{ row.ID_fournisseur }}
 						</td>
 						<td class="align-middle">
-							{{ row.duree_film|default("", True) }}
+							{{ row.nom_fournisseur }}
 						</td>
 						<td class="align-middle">
-							{{ row.date_sortie_film|default("", True) }}
+							{{ row.adresse_fournisseur }}
 						</td>
 						<td class="align-middle">
-							{{ row.description_film|default("", True) }}
+							{{ row.numero_telephone_fournisseur }}
 						</td>
 						<td class="align-middle">
                             <img class="img" src={{ row.cover_link_film|default(None, True) }} style="border: 0;display:block; width:150px; max-height:auto;" alt = "image masquée FFP67 (in COVID-29 Memory) (absente) mod 164">
