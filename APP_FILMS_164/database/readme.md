@@ -37,9 +37,13 @@ c) Cliquer sur "Installer" pour lancer l'installation.
 
 4.2) Choisir le type de projet et donner lui un nom. 
 
- 
 
-   
+
+
+
+
+
+
 CRÉATION DE LA BASE DE DONNÉES EN FONCTION DU DUMP FOURNI
 1. Ouvrer mon dump
 
@@ -91,11 +95,15 @@ c) Cliquer sur la flèche bleue (bouton Exécuter).
 
 8. Vérifier la base de données
 
-8.1) Après le rafraîchissement, vous devriez voir apparaître la nouvelle base de données avec les tables et les données importées.
+8.1) Après le rafraîchissement, vous devriez voir apparaître la nouvelle base de données avec les tables et les données importées. 
 
- 
 
- 
+
+
+
+
+
+
 INSTALLATION – PyCharm
 1. Télécharger PyCharm Community Edition 
 
@@ -119,9 +127,13 @@ INSTALLATION – PyCharm
 
 2.6) Une fois l'installation terminée, cliquer sur "Finish". 
 
- 
 
- 
+
+
+
+
+
+
 CREATION D’UN NOUVEAU PROJET DANS PyCharm
 1. Lancer PyCharm 
 
