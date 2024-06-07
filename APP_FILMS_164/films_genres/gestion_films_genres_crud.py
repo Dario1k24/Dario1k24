@@ -61,7 +61,7 @@ def films_genres_afficher(id_film_sel):
                     # Si l'utilisateur change l'id_film dans l'URL et qu'il ne correspond à aucun film
                     flash(f"Le film {id_film_sel} demandé n'existe pas !!", "warning")
                 else:
-                    flash(f"Données films et genres affichés !!", "success")
+                    flash(f"Données sur les fournisseurs et  les produits affichés", "success")
 
         except Exception as Exception_films_genres_afficher:
             raise ExceptionFilmsGenresAfficher(f"fichier : {Path(__file__).name}  ;  {films_genres_afficher.__name__} ;"
@@ -318,7 +318,7 @@ def genres_films_afficher_data(valeur_id_film_selected_dict):
             # Retourne les données des "SELECT"
             return data_film_selected, data_genres_films_non_attribues, data_genres_films_attribues
 
-    except Exception as Exception_genres_films_afficher_data:
+    except Exception as Exception_fournisseur_produit_afficher_data:
         raise ExceptionGenresFilmsAfficherData(f"fichier : {Path(__file__).name}  ;  "
                                                f"{genres_films_afficher_data.__name__} ; "
-                                               f"{Exception_genres_films_afficher_data}")
+                                               f"{Exception_fournisseur_produit_afficher_data}")

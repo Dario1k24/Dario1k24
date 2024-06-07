@@ -39,27 +39,20 @@ class FormWTFAddFilm(FlaskForm):
                                                                               "d'espace à double, de double "
                                                                               "apostrophe, de double trait union")
                                                                ])
+
     submit = SubmitField("Enregistrer ce nouveau fournisseur")
 
 
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
 class FormWTFUpdateFilm(FlaskForm):
-    """
-        Dans le formulaire "film_update_wtf.html" on impose que le champ soit rempli.
-        Définition d'un "bouton" submit avec un libellé personnalisé.
-    """
-
-    nom_fournisseur_update_wtf = StringField("Clavioter le titre", widget=TextArea())
-    adresse_fournisseur_update_wtf = IntegerField("Durée du film (minutes)", validators=[NumberRange(min=1, max=5000,
-                                                                                            message=u"Min %(min)d et "
-                                                                                                    u"max %(max)d "
-                                                                                                    u"Selon Wikipédia "
-                                                                                                    u"L'Incendie du "
-                                                                                                    u"monastère du "
-                                                                                                    u"Lotus rouge "
-                                                                                                    u"durée 1620 "
-                                                                                                    u"min")])
-
-    submit = SubmitField("Update film")
+    nom_fournisseur_update = StringField('Nom fournisseur', validators=[DataRequired()])
+    adresse_fournisseur_update = StringField('Adresse fournisseur')
+    numero_telephone_fournisseur_update = StringField('Numéro de téléphone fournisseur')
+    submit = SubmitField('Modifier')
 
 
 class FormWTFDeleteFilm(FlaskForm):

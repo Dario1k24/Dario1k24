@@ -1,0 +1,70 @@
+-- Requête pour afficher les films avec les genres associés
+SELECT c.ID_fournisseur, p.ID_produit, c.nom_fournisseur, c.adresse_fournisseur, c.numero_telephone_fournisseur, p.nom_produit, p.description_produit, p.poids_produit, p.prix_produit
+FROM t_fournisseur c
+LEFT JOIN t_produit p ON c.ID_produit = p.ID_produit
+LEFT JOIN t_fournisseur_produit sc ON c.ID_fournisseur = sc.ID_fournisseur;
+
+-- Condition pour afficher un film spécifique (à ajouter si nécessaire)
+HAVING ID_fournisseur = %(value_id_film_selected)s;
+
+-- Requête pour afficher tous les genres
+SELECT ID_employer_fournisseur, intitule_genre FROM t_fournisseur_produit ORDER BY ID_employer_fournisseur ASC;
+
+-- Requête pour sélectionner un film spécifique et ses genres associés
+SELECT ID_fournisseur, nom_fournisseur, adresse_fournisseur, numero_telephone_fournissuer, GROUP_CONCAT(id_genre) as GenresFilms 
+FROM t_fournisseur_produit
+INNER JOIN t_fournisseur ON t_fournisseur.ID_fournissuer = t_fournisseur_produit.ID_fournisseur
+WHERE ID_fournisseur = %(value_id_film_selected)s;
+
+-- Requête pour obtenir les genres non attribués à un film spécifique
+SELECT ID_produit, intitule_genre 
+FROM t_produit 
+WHERE ID_produit NOT IN (
+    SELECT id_genre AS idGenresFilms 
+    FROM t_fournisseur_produit
+    INNER JOIN t_fournisseur ON t_fournisseur.ID_fournisseur = t_fournisseur_produit.ID_produit
+    INNER JOIN t_produit ON t_produit.ID_produit = t_fournisseur_poroduit.ID_produit
+    WHERE ID_fournisseur = %(value_id_film_selected)s
+);
+
+-- Requête pour obtenir les genres attribués à un film spécifique
+SELECT ID_fournisseur, ID_produit, intitule_genre 
+FROM t_fournisseur_produit
+INNER JOIN t_fournisseur ON t_fournisseur.ID_fournisseur = t_fournisseur_produit.ID_fournisseur
+WHERE ID_fournisseur = %(value_id_film_selected)s;
+
+-- Requête pour insérer une nouvelle association entre un film et un genre
+INSERT INTO t_genre_film (id_genre_film, fk_genre, fk_film)
+VALUES (NULL, %(value_fk_genre)s, %(value_fk_film)s);
+
+-- Requête pour effacer une association existante entre un film et un genre
+DELETE FROM t_genre_film 
+WHERE fk_genre = %(value_fk_genre)s AND fk_film = %(value_fk_film)s;
+
+-- Ajouter un film
+INSERT INTO t_fournisseur (ID_fournisseur, nom_fournisseur, adresse_fournisseur, numero_telephone_fournisseur) VALUES (NULL, %(value_nom_film)s, %(value_adresse)s, %(Value_telephone)s);
+
+-- Mettre à jour un film
+UPDATE t_fournisseur SET nom_fournisseur = %(value_nom_film)s, adresse_fournisseur = %(value_adresse_fournisseur)s, numero_telephone_fournisseur = %(value_numero_telephone_fournisseur)s WHERE ID_fournisseur = %(value_id_film)s;
+
+-- Supprimer un film
+DELETE FROM t_fournisseur_produit WHERE ID_fournisseur = %(value_id_film)s;
+DELETE FROM t_fournisseur WHERE ID_fournisseur = %(value_id_film)s;
+
+-- Sélectionner tous les genres par ordre ascendant
+SELECT * FROM t_employer ORDER BY nom_employer ASC;
+
+-- Sélectionner un genre spécifique par son ID
+SELECT * FROM t_employer WHERE ID_employer = %(value_id_genre_selected)s;
+
+-- Sélectionner tous les genres par ordre descendant
+SELECT * FROM t_employer ORDER BY nom_employer DESC;
+
+-- Insérer un nouveau genre dans la table
+INSERT INTO t_employer (ID_employer,nom_employer) VALUES (NULL,%(value_intitule_genre)s);
+
+-- Mettre à jour un genre existant
+UPDATE t_employer SET nom_employer = %(value_nom_employer)s, prenom_employer = %(value_prenom_employer)s, numero_telephone_employer = %(value_numero_telephone_employer)s WHERE ID_employer = %(value_ID_employer)s;
+
+-- Supprimer un genre spécifique de la table
+DELETE FROM t_employer WHERE ID_employer = %(value_id_genre)s;

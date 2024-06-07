@@ -12,23 +12,23 @@
 				{{ form_update_film.hidden_tag() }}
 				<div class="form-group">
 					<p>
-						{{ form_update_film.nom_fournisseur.label }}<br>
-						{{ form_update_film.nom_fournisseur(cols=50, rows=3) }}<br>
-						{% for error in form_update_film.nom_fournisseur.errors %}
+						{{ form_update_film.nom_fournisseur_update.label }}<br>
+						{{ form_update_film.nom_fournisseur_update(cols=50, rows=3) }}<br>
+						{% for error in form_update_film.nom_fournisseur_update.errors %}
 						<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
 					<p>
-						{{ form_update_film.adresse_fournisseur.label }}<br>
-						{{ form_update_film.adresse_fournisseur(size=32) }}<br>
-						{% for error in form_update_film.adresse_fournisseur.errors %}
+						{{ form_update_film.adresse_fournisseur_update.label }}<br>
+						{{ form_update_film.adresse_fournisseur_update(size=32) }}<br>
+						{% for error in form_update_film.adresse_fournisseur_update.errors %}
 						<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
 					<p>
-						{{ form_update_film.numero_telephone_fournisseur.label }}<br>
-						{{ form_update_film.numero_telephone_fournisseur(cols=50, rows=10) }}<br>
-						{% for error in form_update_film.numero_telephone_fournisseur.errors %}
+						{{ form_update_film.numero_telephone_fournisseur_update.label }}<br>
+						{{ form_update_film.numero_telephone_fournisseur_update(cols=50, rows=10) }}<br>
+						{% for error in form_update_film.numero_telephone_fournisseur_update.errors %}
 						<span style="color: red;">[{{ error }}]</span>
 						{% endfor %}
 					</p>
@@ -39,4 +39,3 @@
 	</div>
 </div>
 {% endblock %}
-

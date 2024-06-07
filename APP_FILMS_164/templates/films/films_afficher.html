@@ -3,14 +3,18 @@
 {% block body %}
 <div class="container">
     <div class="col-md-12">
+        <h1>Liste des Fournisseurs</h1>
+        <div class="text-right mb-3">
+            <a href="{{ url_for('film_add_wtf') }}" class="btn btn-primary">Ajouter un fournisseur</a>
+        </div>
         <table class="table table-responsive-sm">
             {% if data %}
                 <thead>
                     <tr>
                         <th>Id Fournisseur</th>
-                        <th>Nom Fournisseur</th>
-                        <th>Adresse Fournisseur</th>
-                        <th>Numéro Téléphone Fournisseur</th>
+                        <th>Nom du fournisseur</th>
+                        <th>Adresse du fournisseur</th>
+                        <th>Numéro de téléphone du fournisseur</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,12 +24,25 @@
                             <td>{{ row.nom_fournisseur }}</td>
                             <td>{{ row.adresse_fournisseur }}</td>
                             <td>{{ row.numero_telephone_fournisseur }}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Actions">
+                                    <!-- Bouton Modifier -->
+                                    <form action="{{ url_for('film_update_wtf') }}" method="POST" style="display: inline;">
+                                        <input type="hidden" name="id_film_btn_edit_html" value="{{ row.ID_fournisseur }}">
+                                        <button type="submit" class="btn btn-warning btn-sm">Modifier</button>
+                                    </form>
+                                    <!-- Bouton Supprimer -->
+                                    <form action="{{ url_for('film_delete_wtf') }}" method="POST" style="display: inline;">
+                                        <input type="hidden" name="id_film_btn_delete_html" value="{{ row.ID_fournisseur }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
-
                     {% endfor %}
                 </tbody>
             {% else %}
-                <tr><td colspan="7">Aucun fournisseur et produit.</td></tr>
+                <tr><td colspan="5">Aucun fournisseur.</td></tr>
             {% endif %}
         </table>
     </div>
