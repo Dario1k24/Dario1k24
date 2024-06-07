@@ -3,17 +3,21 @@
 {% block body %}
 <div class="container">
     <div class="col-md-12">
+        <h1>Liste des Fournisseurs et Produits</h1>
+        <div class="text-right mb-3">
+            <a href="{{ url_for('film_add_wtf') }}" class="btn btn-primary">Ajouter un Fournisseur</a>
+        </div>
         <table class="table table-responsive-sm">
             {% if data %}
                 <thead>
                     <tr>
                         <th>Id Fournisseur</th>
-                        <th>Nom Fournisseur</th>
-                        <th>Adresse Fournisseur</th>
-                        <th>Numéro Téléphone Fournisseur</th>
+                        <th>Nom du fournisseur</th>
+                        <th>Adresse du fournisseur</th>
+                        <th>Numéro de téléphone du fournisseur</th>
                         <th>Id Produit</th>
-                        <th>Nom Produit</th>
-                        <th>Prix Produit</th>
+                        <th>Nom du produit</th>
+                        <th>Prix du produit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,11 +30,23 @@
                             <td>{{ row.ID_produit }}</td>
                             <td>{{ row.nom_produit }}</td>
                             <td>{{ row.prix_produit }}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Actions">
+                                    <form action="{{ url_for('film_update_wtf') }}" method="POST" style="display: inline;">
+                                        <input type="hidden" name="id_film_btn_edit_html" value="{{ row.ID_fournisseur }}">
+                                        <button type="submit" class="btn btn-warning btn-sm">Modifier</button>
+                                    </form>
+                                    <form action="{{ url_for('film_delete_wtf') }}" method="POST" style="display: inline;">
+                                        <input type="hidden" name="id_film_btn_delete_html" value="{{ row.ID_fournisseur }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             {% else %}
-                <tr><td colspan="7">Aucun fournisseur et produit.</td></tr>
+                <tr><td colspan="8">Aucun fournisseur et produit.</td></tr>
             {% endif %}
         </table>
     </div>

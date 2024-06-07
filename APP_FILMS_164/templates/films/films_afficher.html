@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Afficher Fournisseurs et Produits {% endblock %}
+{% block title %} Afficher Fournisseurs {% endblock %}
 {% block body %}
 <div class="container">
     <div class="col-md-12">
@@ -11,9 +11,6 @@
                         <th>Nom Fournisseur</th>
                         <th>Adresse Fournisseur</th>
                         <th>Numéro Téléphone Fournisseur</th>
-                        <th>Id Produit</th>
-                        <th>Nom Produit</th>
-                        <th>Prix Produit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,10 +20,8 @@
                             <td>{{ row.nom_fournisseur }}</td>
                             <td>{{ row.adresse_fournisseur }}</td>
                             <td>{{ row.numero_telephone_fournisseur }}</td>
-                            <td>{{ row.ID_produit }}</td>
-                            <td>{{ row.nom_produit }}</td>
-                            <td>{{ row.prix_produit }}</td>
                         </tr>
+
                     {% endfor %}
                 </tbody>
             {% else %}
